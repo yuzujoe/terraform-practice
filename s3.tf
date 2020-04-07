@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "alb_log" {
 
     principals {
       type        = "AWS"
-      identigiers = ["582318560864"]
+      identigiers = ["273172227336"]
     }
   }
 }
