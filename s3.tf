@@ -35,3 +35,15 @@ resource "aws_s3_bucket" "public" {
     max_age_seconds = 3000
   }
 }
+
+resource "aws_s3_bucket" "alb_log" {
+  bucket = "alb-log-pragmatic-terraform"
+
+  lifecycle_rule {
+    enabled true
+    # 指定した日数経過したファイルは削除する
+    expiration {
+      days = "180"
+    }
+  }
+}
