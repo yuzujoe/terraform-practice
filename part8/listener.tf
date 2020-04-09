@@ -48,3 +48,18 @@ resource "aws_lb_listener" "redirect_http_to_https" {
   }
 }
 
+resource "aws_lb_listener_rule" "example" {
+  listener_arn = aws_lb_listener.https.arn
+  # リスナールールは複数指定でき、優先順位をpriorityで表す。
+  priority = 100
+  # フォワード先のターゲットグループを設定する
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.example.arn
+  }
+
+  condition {
+    field  = "path-pattern"
+    values = ["/*"]
+  }
+}
