@@ -15,10 +15,10 @@ resource "aws_ecs_task_definition" "example" {
 }
 
 resource "aws_ecs_service" "example" {
-  name                              = "example"
-  cluster                           = aws_ecs_cluster.example.arn
-  task_definition                   = aws_ecs_task_definition.example.arn
-//  ECSが維持するタスク数
+  name            = "example"
+  cluster         = aws_ecs_cluster.example.arn
+  task_definition = aws_ecs_task_definition.example.arn
+  //  ECSが維持するタスク数
   desired_count                     = 2
   launch_type                       = "FARGATE"
   platform_version                  = "1.3.0"
@@ -51,4 +51,9 @@ module "nginx_sg" {
   vpc_id       = aws_vpc.example.id
   port         = 80
   cider_blocks = [aws_vpc.example.cider_block]
+}
+
+resource "aws_cloudwatch_log_group" "for_ecs" {
+  name              = "/ecs/example"
+  retention_in_days = 180
 }
