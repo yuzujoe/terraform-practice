@@ -12,6 +12,12 @@
         "awslogs-group": "/ecs-scheduled-tasks/example"
       }
     },
-    "command": ["/bin/date"]
+    "secrets": [
+      {
+        "name": "DB_USRENAME",
+        "valueForm": "/db/password"
+      }
+    ],
+    "command": ["/usr/bin/env"]
   }
 ]
