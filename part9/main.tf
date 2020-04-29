@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "example" {
   //  fargateの場合はネットワークモードをawsvpcにする
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn = module.ecs_task_execution_role.iam_role_arn
+  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
 }
 
 resource "aws_ecs_service" "example" {
@@ -67,15 +67,15 @@ data "aws_iam_policy_document" "ecs_task_execution" {
   source_json = data.aws_iam_policy.ecs_task_execution_role_policy.policy
 
   statement {
-    effect = "Allow"
-    actions = ["ssm:Getparameters", "kms:Decrpt"]
+    effect    = "Allow"
+    actions   = ["ssm:Getparameters", "kms:Decrpt"]
     resources = ["*"]
   }
 }
 
 module "ecs_task_execution_role" {
-  source = "./iam_role"
-  name = "ecs-task-execution"
+  source     = "./iam_role"
+  name       = "ecs-task-execution"
   identifier = "ecs-tasks.amazonaws.com"
-  policy = data.aws_iam_policy_document.ecs_task_execution.json
+  policy     = data.aws_iam_policy_document.ecs_task_execution.json
 }
