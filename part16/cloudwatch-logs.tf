@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "cloudwatch-logs" {
+data "aws_iam_policy_document" "cloudwatch_logs" {
   statement {
     effect = "Allow"
     actions = ["firehose:*"]
