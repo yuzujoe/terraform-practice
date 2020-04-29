@@ -4,7 +4,7 @@ resource "aws_vpc" "staging" {
 
 resource "aws_subnet" "public_staging" {
   cidr_block = "192.168.0.0/24"
-  vpc_id = aws_vpc.staging.id
+  vpc_id     = aws_vpc.staging.id
 }
 
 output "vpc_id" {
